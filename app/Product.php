@@ -25,7 +25,7 @@ class Product extends Model
 
     public function seller()
     {
-        return $this->belongsTo(Seller:class);
+        return $this->belongsTo(Seller::class);
     }
 
     public function categories()
@@ -35,6 +35,6 @@ class Product extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction:class);
+        return $this->hasMany(Transaction::class);
     }
 }
