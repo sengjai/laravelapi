@@ -77,7 +77,7 @@ class UserController extends Controller
         $rules = [
             'email' => 'email|unique:users,email,'. $user->id,
             'password' => 'min:6|confirmed',
-            'admin' = 'in:' . User::ADMIN_USER . ',' . User::REGULAR_USER,
+            'admin' => 'in:' . User::ADMIN_USER . ',' . User::REGULAR_USER,
         ];
 
         if($request->has('name')) {
@@ -91,7 +91,7 @@ class UserController extends Controller
         }
 
         if($request->has('password')) {
-            $user->password = bcrypt($request->password)
+            $user->password = bcrypt($request->password);
         }
 
         if($request->has('admin')) {
@@ -108,9 +108,6 @@ class UserController extends Controller
             $user->save();
             return response()->json(['data' => $user], 200);
         }
-
-
-        
     }
 
     /**
@@ -122,5 +119,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return response()->json(['data' => $user], 200); 
     }
 }
